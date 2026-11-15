@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "AuraTab — Glassmorphism Workspace",
+  "version": "1.1.0",
+  "description": "Минималистичная новая вкладка в стиле Glassmorphism: виджеты, таймер, счётчики, живые обои и управление YouTube Music.",
+  "icons": {
+    "16": "ytm-logo.png",
+    "48": "ytm-logo.png",
+    "128": "ytm-logo.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "notifications",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://music.youtube.com/*"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://music.youtube.com/*"],
+      "js": ["ytm-bridge.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "auratab-workspace@local.ext",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}
